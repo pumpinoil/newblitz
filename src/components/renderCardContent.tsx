@@ -1,5 +1,7 @@
-import React from 'react';
-import { MagickCardProps } from '../types/magickCard';
+// src/components/renderCardContent.tsx
+// Remove the following line if React is not directly used
+// import React from 'react';
+import { MagickCardProps } from '../types';
 import * as Cards from './cards';
 
 const componentMap = {

@@ -1,10 +1,12 @@
+// src/store/slices/designerSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { MagickCardProps, PageSettings } from '../../types/magickCard';
+import { MagickCardProps, PageSettings, Theme } from '../../types';
+
 
 interface DesignerState {
   cards: MagickCardProps[];
   selectedCardId: string | null;
-  theme: 'light' | 'dark';
+  theme: Theme;
   pageSettings: PageSettings;
 }
 

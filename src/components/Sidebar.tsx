@@ -1,3 +1,4 @@
+// src/components/Sidebar.tsx
 import React from 'react';
 import { Droppable } from '@hello-pangea/dnd';
 import { motion } from 'framer-motion';
@@ -12,9 +13,11 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const [activeItemId, setActiveItemId] = React.useState<string | null>(null);
-  // We'll have a static list of components
+  
+  // Static list of components
   const items = [
     { id: 'magickal_glass_card', label: 'Magickal Glass Card' },
+    // Add more items here if needed
   ];
 
   return (
@@ -60,7 +63,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        <Droppable droppableId="sidebar" type="CARD">
+        {/* Droppable with isDropDisabled to prevent dropping back into the sidebar */}
+        <Droppable droppableId="sidebar" type="CARD" isDropDisabled={true}>
           {(provided) => (
             <div 
               ref={provided.innerRef} 

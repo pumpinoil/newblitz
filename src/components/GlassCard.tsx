@@ -1,23 +1,23 @@
-// GlassCard.tsx
+// src/components/GlassCard.tsx
+
 import React from 'react';
 import { Settings } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { MagickCardProps } from '../types/magickCard';
+import { MagickCardProps } from '../types';
 
 interface GlassCardProps {
-  id: string;
-  index: number; // Ensure index is required
+  index: number;
   label: string;
   children?: React.ReactNode;
   card?: MagickCardProps;
   onSettingsClick?: () => void;
 }
 
-const GlassCard: React.FC<GlassCardProps> = ({ id, label, children, card, onSettingsClick }) => {
+const GlassCard: React.FC<GlassCardProps> = ({ label, children, card, onSettingsClick }) => {
   return (
     <motion.div
       className={`
-        custom-glass p-4 rounded-lg backdrop-blur-lg relative
+        glass p-4 rounded-lg backdrop-blur-lg relative
         hover:bg-white/10 cursor-grab active:cursor-grabbing group
         transition-all duration-200 ease-in-out
         h-full w-full

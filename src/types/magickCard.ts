@@ -1,11 +1,15 @@
+// src/types/magickCard.ts
 export interface CardProps {
   id: string;
   type: string;
+  componentType: string;
+  content: React.ReactNode;
   position: {
     x: number;
     y: number;
   };
-  componentType: string;
+  w: number;
+  h: number;
 }
 
 export interface MagickCardProps extends CardProps {
@@ -42,16 +46,3 @@ export interface MagickCardProps extends CardProps {
   isVisible?: boolean;
   isLocked?: boolean;
 }
-
-export interface PageSettings {
-  backgroundImage: string;
-  backgroundBlur: number;
-  backgroundOpacity: number;
-  backgroundColor: string;
-  showHeader: boolean;
-  showFooter: boolean;
-  headerTitle: string;
-  footerText: string;
-}
-
-export type Theme = 'light' | 'dark';

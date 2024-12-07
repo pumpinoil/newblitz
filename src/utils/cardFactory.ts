@@ -1,26 +1,33 @@
-// src/components/cardFactory.ts
-
+// src/utils/cardFactory.ts
 import { v4 as uuidv4 } from 'uuid';
-import { MagickCardProps } from '../types/';
+import { MagickCardProps } from '../types';
 
 export function getDefaultCardProps(componentType: string): MagickCardProps {
   let defaultContent = "<p>Edit this text</p>";
   const defaultData: Record<string, string | number> = {};
 
-  if (componentType === 'magickal_glass_card') {
-    defaultContent = "<p>✨ Magickal content goes here...</p>";
-  } else if (componentType === 'video_player_comp') {
-    defaultData.videoURL = "https://www.youtube.com/embed/dQw4w9WgXcQ";
-  } else if (componentType === 'article_comp') {
-    defaultContent = "<h1>Magickal Design Principles</h1><p>Explore foundational concepts...</p>";
-  } else if (componentType === 'fractal_canvas_comp') {
-    defaultData.fractalParam = 1;
+  switch (componentType) {
+    case 'magickal_glass_card':
+      defaultContent = "<p>✨ Magickal content goes here...</p>";
+      break;
+    case 'video_player_comp':
+      defaultData.videoURL = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+      break;
+    case 'article_comp':
+      defaultContent = "<h1>Magickal Design Principles</h1><p>Explore foundational concepts...</p>";
+      break;
+    case 'fractal_canvas_comp':
+      defaultData.fractalParam = 1;
+      break;
+    // Add other component types as needed
+    default:
+      break;
   }
 
- return {
+  return {
     id: uuidv4(),
     type: componentType,
-    componentType,
+    componentType, // Ensure this is set
     content: defaultContent,
     opacity: 0.9,
     imageOpacity: 1,
@@ -56,4 +63,3 @@ export function getDefaultCardProps(componentType: string): MagickCardProps {
     isLocked: false
   };
 }
- 

@@ -1,3 +1,4 @@
+// src/components/Designer.tsx
 import React, { useEffect, useState } from 'react';
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -26,7 +27,7 @@ const Designer: React.FC = () => {
     };
     window.addEventListener('openPageCustomization', handler);
     return () => window.removeEventListener('openPageCustomization', handler);
-  }, [dispatch]);
+  }, []);
 
   const handleCardSelect = (id: string) => {
     dispatch(selectCard(id));
@@ -39,39 +40,39 @@ const Designer: React.FC = () => {
 
   const handleDragEnd = (result: DropResult) => {
     const { source, destination, draggableId } = result;
-    if (!destination || !result.destination) return;
 
+    if (!destination) return;
+
+    // Dragging from sidebar to canvas
     if (source.droppableId === 'sidebar' && destination.droppableId === 'canvas') {
-      const cardProps = getDefaultCardProps(draggableId);
+      const componentType = draggableId; // Assuming draggableId corresponds to componentType
+      const cardProps = getDefaultCardProps(componentType);
+
+      // Calculate grid position based on destination index
+      const gridX = destination.index % 12; // Assuming 12 columns
+      const gridY = Math.floor(destination.index / 12);
       cardProps.position = {
-        x: Math.max(0, destination.index * 50),
-        y: Math.max(0, destination.index * 50)
+        x: gridX,
+        y: gridY
       };
-      cardProps.w = 200;
-      cardProps.h = 100;
+      cardProps.w = 4;
+      cardProps.h = 2;
+
       dispatch(addCard(cardProps));
     }
+    // Handle other drag scenarios if necessary
   };
 
   return (
     <LayoutHeaderFooter onToggleSidebar={() => setSidebarOpen(!isSidebarOpen)}>
       <DragDropContext onDragEnd={handleDragEnd}>
         <div className="relative h-screen flex overflow-hidden">
-          <div className={`fixed inset-y-0 left-0 z-30 transition-transform duration-300 transform ${
-            isSidebarOpen ? 'translate-x-0' : '-translate-x-[300px]'
-          }`}>
-            <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
-          </div>
+          <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
 
           <div className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-[300px]' : 'ml-0'}`}>
-          <CanvasArea 
+            <CanvasArea 
               cards={cards} 
-              onCardSelect={(id: string, event?: React.MouseEvent) => {
-                // Handle the card selection
-                if (event && (event.target as HTMLElement).closest('.card-settings-trigger')) {
-                  handleCardSelect(id);
-                }
-              }} 
+              onCardSelect={handleCardSelect} // Ensure it matches the expected signature
             />
           </div>
         </div>
