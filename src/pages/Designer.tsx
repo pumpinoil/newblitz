@@ -64,11 +64,11 @@ const Designer: React.FC = () => {
           </div>
 
           <div className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-[300px]' : 'ml-0'}`}>
-            <CanvasArea 
+          <CanvasArea 
               cards={cards} 
-              onCardSelect={(id: string, event: React.MouseEvent) => {
-                // Only show customization if clicking the settings icon
-                if ((event.target as HTMLElement).closest('.card-settings-trigger')) {
+              onCardSelect={(id: string, event?: React.MouseEvent) => {
+                // Handle the card selection
+                if (event && (event.target as HTMLElement).closest('.card-settings-trigger')) {
                   handleCardSelect(id);
                 }
               }} 

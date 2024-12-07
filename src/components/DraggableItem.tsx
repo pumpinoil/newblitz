@@ -1,3 +1,4 @@
+// DraggableItem.tsx
 import React from 'react';
 import { Draggable } from '@hello-pangea/dnd';
 import { Sparkles } from 'lucide-react';
@@ -20,7 +21,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({ id, index, label, isActiv
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           animate={{
-            opacity: isActive ? 1 : 0.5,
+            opacity: isActive ? 1 : 0.8,
             scale: isActive ? 1.02 : 1,
             boxShadow: snapshot.isDragging ? '0 8px 16px rgba(0,0,0,0.2)' : 'none',
             backgroundColor: snapshot.isDragging ? 'rgba(255, 255, 255, 0.15)' : undefined
