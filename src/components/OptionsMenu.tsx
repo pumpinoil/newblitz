@@ -1,0 +1,69 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { X } from 'lucide-react';
+import { MagickCardProps } from '../types';
+
+interface OptionsMenuProps {
+  card?: MagickCardProps;
+  isOpen: boolean;
+  onClose: () => void;
+  position: { x: number; y: number };
+}
+
+const OptionsMenu: React.FC<OptionsMenuProps> = ({ card, isOpen, onClose, position }) => {
+  if (!isOpen) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      className="fixed glass dark:glass-dark backdrop-blur-md p-4 rounded-lg shadow-xl z-50"
+      style={{
+        top: position.y,
+        left: position.x,
+        minWidth: '200px'
+      }}
+    >
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold">Options</h3>
+        <button
+          onClick={onClose}
+          className="p-1 hover:bg-white/10 rounded-full"
+        >
+          <X size={16} />
+        </button>
+      </div>
+      
+      <div className="space-y-3">
+        <button
+          className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-md transition-colors"
+          onClick={() => {
+            // Handle edit
+            onClose();
+          }}
+        >
+          Edit
+        </button>
+        <button
+          className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-md transition-colors"
+          onClick={() => {
+            // Handle duplicate
+            onClose();
+          }}
+        >
+          Duplicate
+        </button>
+        <button
+          className="w-full text-left px-3 py-2 hover:bg-red-500/20 text-red-400 rounded-md transition-colors"
+          onClick={() => {
+            // Handle delete
+            onClose();
+          }}
+        >
+          Delete
+        </button>
+      </div>
+    </motion.div>
+  );
+};

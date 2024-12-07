@@ -1,0 +1,161 @@
+/* src/index.css */
+
+/* Importing Tailwind CSS Base, Components, and Utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+}
+
+body {
+  @apply antialiased;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --glass-light: 0 0% 100%;
+    --glass-dark: 0 0% 0%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --glass-light: 0 0% 100%;
+    --glass-dark: 0 0% 0%;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/10 border border-white/20 rounded-xl shadow-lg;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .glass-dark {
+    @apply bg-black/50 border border-white/10;
+  }
+
+  .button-primary {
+    @apply glass px-4 py-2 rounded-lg transition-all duration-300
+           hover:bg-white/20 active:scale-95 cursor-pointer;
+  }
+
+  .button-secondary {
+    @apply glass-dark px-4 py-2 rounded-lg transition-all duration-300
+           hover:bg-black/60 active:scale-95 cursor-pointer;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Grid Layout styles */
+  .react-grid-layout {
+    position: relative;
+    height: 100vh;
+    width: 100% !important;
+    overflow: hidden;
+  }
+  
+  .react-grid-item {
+    transition: transform 200ms ease;
+  }
+  
+  .react-grid-item.cssTransforms {
+    transition-property: transform;
+    will-change: transform;
+  }
+  
+  .react-grid-item.resizing {
+    z-index: 1;
+  }
+  
+  .react-grid-item.react-draggable-dragging {
+    transition: none;
+    z-index: 3;
+    will-change: transform;
+    cursor: move;
+    opacity: 0.8;
+    pointer-events: auto;
+    background: rgba(79, 70, 229, 0.1);
+    border: 2px dashed rgba(79, 70, 229, 0.3);
+    border-radius: 0.5rem;
+    cursor: grabbing;
+    will-change: transform;
+  }
+  
+  .react-grid-item.react-grid-placeholder {
+    background: rgba(79, 70, 229, 0.1);
+    border: 2px dashed rgba(79, 70, 229, 0.3);
+    border-radius: 0.5rem;
+    z-index: 1;
+    transition: all 200ms ease;
+  }
+
+  .react-grid-item {
+    transition: all 200ms ease;
+  }
+  
+  .react-grid-item.react-draggable-dragging {
+    transition: none;
+    z-index: 3;
+    cursor: move;
+    opacity: 0.8;
+    background: rgba(79, 70, 229, 0.15);
+    border: 2px dashed rgba(79, 70, 229, 0.3);
+    border-radius: 0.5rem;
+    pointer-events: auto;
+    transform-origin: center center;
+    will-change: transform;
+  }
+  
+  .react-grid-item.resizing {
+    z-index: 2;
+    will-change: width, height;
+    opacity: 0.9;
+  }
+  
+  .bg-gradient-custom {
+    @apply bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-blue-500/20 
+           dark:from-purple-900/30 dark:via-pink-900/30 dark:to-blue-900/30;
+  }
+
+  /* Resize handle styles */
+  .react-resizable-handle {
+    @apply w-4 h-4 absolute bg-white/20 rounded-full hover:bg-white/40 transition-colors;
+  }
+  
+  .react-resizable-handle-se {
+    @apply bottom-0 right-0 cursor-se-resize;
+  }
+  
+  .react-resizable-handle-sw {
+    @apply bottom-0 left-0 cursor-sw-resize;
+  }
+  
+  .react-resizable-handle-ne {
+    @apply top-0 right-0 cursor-ne-resize;
+  }
+  
+  .react-resizable-handle-nw {
+    @apply top-0 left-0 cursor-nw-resize;
+  }
+}
